@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS  universidade_sa1
 	DEFAULT CHARACTER SET utf8mb4
     DEFAULT COLLATE utf8mb4_0900_ai_ci;
-    
 USE universidade_sa1;
 
 
@@ -92,7 +91,7 @@ FOREIGN KEY (fk_cod_tipo_logradouro) REFERENCES tipo_logradouro(cod_tipo_logrado
 );
 
 CREATE TABLE IF NOT EXISTS telefone(
-	cod_telefone INT(4),
+	cod_telefone INT(4) AUTO_INCREMENT,
     num_telefone CHAR(20),
     fk_cod_tipo INT(4),
 PRIMARY KEY (cod_telefone),
@@ -100,7 +99,7 @@ FOREIGN KEY (fk_cod_tipo) REFERENCES tipo_telefone(cod_tipo)
 );
 
 CREATE TABLE IF NOT EXISTS aluno(
-	RA INT(10),
+	RA INT(4) AUTO_INCREMENT,
     nome_aluno CHAR(50),
     sobrenome_aluno CHAR(20),
     CPF INT(11),
@@ -120,8 +119,8 @@ FOREIGN KEY (fk_cod_endereco) REFERENCES endereco(cod_endereco)
 );
 
 CREATE TABLE IF NOT EXISTS telefone_aluno(
-	cod_tel_aluno INT(4),
-    fk_RA INT (10),
+	cod_tel_aluno INT(4) AUTO_INCREMENT,
+    fk_RA INT(4),
     fk_cod_telefone INT(4),
 PRIMARY KEY (cod_tel_aluno),
 FOREIGN KEY (fk_RA) REFERENCES aluno(RA),
@@ -129,20 +128,75 @@ FOREIGN KEY (fk_cod_telefone) REFERENCES telefone (cod_telefone)
 );
 
 CREATE TABLE IF NOT EXISTS historico(
-	cod_historico INT(4),
+	cod_historico INT(4) AUTO_INCREMENT,
     dt_inicio DATE,
     dt_fim DATE,
-    fk_RA INT(10),
+    fk_RA INT(4),
 PRIMARY KEY (cod_historico),
 FOREIGN KEY (fk_RA) REFERENCES aluno(RA)
 );
 
-CREATE TABLE IF NOT EXISTS historico_disciplina(
-	fk_cod_historico INT (4),
-    fk_cod_disciplina INT(4),
+CREATE TABLE IF NOT EXISTS disciplina_historico(
+	fk_cod_historico INT (4) NOT NULL,
+    fk_cod_disciplina INT(4) NOT NULL,
     nota FLOAT (4,2),
     frequencia INT(4),
 PRIMARY KEY (fk_cod_historico, fk_cod_disciplina),
 FOREIGN KEY (fk_cod_historico) REFERENCES  historico(cod_historico),
 FOREIGN KEY (fk_cod_disciplina) REFERENCES disciplina(cod_disciplina)
 );
+
+CREATE TABLE IF NOT EXISTS aluno_disciplina(
+	fk_RA INT(4)NOT NULL,
+    fk_cod_disciplina INT(4) NOT NULL,
+PRIMARY KEY (fk_RA, fk_cod_disciplina),
+FOREIGN KEY (fk_RA) REFERENCES aluno (RA),
+FOREIGN KEY (fk_cod_disciplina) REFERENCES disciplina (cod_disciplina)
+);
+
+ALTER TABLE departamento
+MODIFY COLUMN nome_departamento CHAR(20) NOT NULL;
+
+ALTER TABLE professor
+MODIFY COLUMN  nome CHAR(20) NOT NULL;
+
+ALTER TABLE professor
+MODIFY COLUMN sobrenome CHAR(50) NOT NULL;
+
+
+ALTER TABLE turma
+MODIFY COLUMN periodo CHAR(8);
+
+ALTER TABLE turma
+MODIFY COLUMN  num_alunos INT(8);
+
+ ALTER TABLE disciplina
+ MODIFY COLUMN carga_horaria INT(4) NOT NULL;
+ 
+  ALTER TABLE disciplina
+ MODIFY COLUMN descricao CHAR (50);
+ 
+  ALTER TABLE disciplina
+ MODIFY COLUMN num_alunos INT(4) NOT NULL;
+ 
+  ALTER TABLE tipo_telefone
+ MODIFY COLUMN tipo_telefone CHAR(8);
+ 
+
+  ALTER TABLE endereco
+ MODIFY COLUMN nome_rua CHAR(50) NOT NULL;
+ 
+ALTER TABLE endereco
+ MODIFY COLUMN numero_rua INT(4) NOT NULL;
+ 
+ ALTER TABLE endereco
+ MODIFY COLUMN CEP CHAR(8) NOT NULL;
+ 
+ ALTER TABLE aluno
+ MODIFY COLUMN nome_aluno CHAR(20);
+ 
+  ALTER TABLE aluno
+ MODIFY COLUMN sobrenome_aluno CHAR(20);
+ 
+  ALTER TABLE aluno
+ MODIFY COLUMN CPF CHAR(11);
