@@ -8,6 +8,8 @@
 
 * A documentação do projeto encontra-se em "Projeto SA1"
 
+## Database project for the DBA course SENAI BRASÍLIA/BRAZIL
+
 * As one of the requirements for obtaining the Database Administrator Professional Certification, the Databse project was presented to the DBA course for Database Administration.
 
 * An information bank for managing a university was developed as part of this project. The goals of this database are to implement centralized management over students, instructors, classes, disciplines, and educational history. In this way, we want to create a database for a certain university, with the project's rules of business and requirements being flexible enough to change in response to customer requests and project-related changes.
