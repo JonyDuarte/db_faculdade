@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/38443783/176942138-af899adb-2e28-4406-acf3-c57188693a52.png)
 Comandos básicos GIT
 
 git init (iniciar o GIT)
